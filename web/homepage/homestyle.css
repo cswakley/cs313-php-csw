@@ -1,0 +1,96 @@
+body {
+	background-image: url("f1background.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+div.container {
+	margin: auto;
+	background-color: #778899;
+	width: 80%;
+	border: 1px solid #1b2f2f;
+	padding: 5px 5px 5px 5px;
+}
+
+h1.header {
+	padding: 30px 15px 30px 50px;
+	background-color: #ff3b3b;
+	text-align: center;
+	color: white;
+	text-shadow: 5px 3px #c40000;
+}
+
+article.entry {
+	background-color: #d1d6dc;
+	border-left: 7px solid #1b2f2f;
+	padding: 20px;
+	overflow: hidden;
+	width: 90%;
+	margin: 30px;
+}
+
+article.notice {
+	text-align: center;
+	font-weight: bold;
+	background-color: #b10000;
+	color: white;
+	width: 70%;
+}
+
+table, th, td {
+	border: 1px solid black;
+}
+
+a:link {
+    color: orange;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a:visited {
+    color: pink;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a:hover {
+    color: black;
+    background-color: transparent;
+    text-decoration: underline;
+}
+a:active {
+    color: yellow;
+    background-color: transparent;
+    text-decoration: underline;
+}
+
+.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.tab button:hover {
+    background-color: #ddd;
+}
+
+.tab button.active {
+    background-color: #ccc;
+}
+
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
