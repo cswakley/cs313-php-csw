@@ -29,12 +29,21 @@
 	{
 		if($_POST['usrname'] != "")
 		{
+			$usermatch = false;
+
 			foreach($db->query('SELECT username, password FROM users') as $log)
 			{
 				if($log['username'] == $_POST['usrname'] && $log['password'] == $_POST['pass'])
 				{
 					$_SESSION['usr'] = $log['username'];
+					$usermatch = true;
 				}
+			}
+			if (!$usermatch)
+			{
+				echo '<script>';
+				echo 'alert("Username or password does not match!")';
+				echo '</script>';
 			}
 		}
 	}
@@ -71,10 +80,14 @@
 	<?php
 		}
 		else {
-			echo 'Welcome, ' . $_SESSION['usr'];
 	?>
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" name="logout">
+	<?php
+			echo '<div class="login">Welcome, ' . $_SESSION['usr'] . ' - ';
+	?>
 			<input type="submit" name="logout" value="Logout">
+			</div>
+			</form>
 	<?php
 		}
 	?>
