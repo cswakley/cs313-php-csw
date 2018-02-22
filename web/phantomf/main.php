@@ -36,6 +36,7 @@
       			<form class="" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
       				Search the Schedule:
       				<select name="games">
+                <option value="all">Show All Events</option>
       					<option value="Garrys Mod">Garrys Mod</option>
       					<option value="Minecraft">Minecraft</option>
       					<option value="Civilization 5">Civilization 5</option>
@@ -61,17 +62,28 @@
 
       			$found = false;
 
+            echo "<table style=\"width:100%\"><tr><th>Date</th><th>Game</th><th>Details</th><th>Created By</th></tr>";
+
       			foreach ($db->query('SELECT * FROM schedule AS u JOIN games AS n ON u.gameId = n.id JOIN users AS k ON u.userId = k.id') as $row)
       			{
-      				if ($row['game'] == $_POST['games'])
+              if ($_POST['games'] == 'all')
+              {
+                echo "<tr><td>" . $row['date'] . "</td><td>" . $row['game'] . "</td><td>" . $row['details'] . "</td><td>" . $row['username'] . "</td></tr>";
+
+                $found = true;
+              }
+      				else if ($row['game'] == $_POST['games'])
       				{
-      					echo $row['date'] . ' - ' . $row['game'] . ': ' . $row['details'] . ' - Created by: ' . $row['username'] . '<br>';
+                echo "<tr><td>" . $row['date'] . "</td><td>" . $row['game'] . "</td><td>" . $row['details'] . "</td><td>" . $row['username'] . "</td></tr>";
+
       					$found = true;
       				}
       			}
+            echo "</table>";
+
       			if (!$found)
       			{
-      				echo 'There are currently no events for the selected game';
+      				echo "<br>There are currently no events for the selected game";
       			}
       			
       			?>

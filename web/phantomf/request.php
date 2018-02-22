@@ -2,6 +2,7 @@
 
 	include 'title.php';
         	
+    // Only logged in users can submit an event
     if (isset($_POST['requestSubmit']) && isset($_SESSION['usr']))
     {
        	$tempG = $_POST['newGame'];
@@ -43,9 +44,27 @@
 		<article class="info">
 			<p>If there is a game you want to add to the schedule, you may do so here, if you are signed in.</p><br>
 			<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" name="request">
-          		Game: <input type="text" name="newGame"><br>
-          		Date: <input type="text" name="gameDate" placeholder="YYYY-MM-DD"><br>
-          		Details: <input type="text" name="gameDetails" size="40"><br>
+              <label>Game: </label><select name="newGame">
+                <option value="Garrys Mod">Garrys Mod</option>
+                <option value="Minecraft">Minecraft</option>
+                <option value="Civilization 5">Civilization 5</option>
+                <option value="Borderlands 2">Borderlands 2</option>
+                <option value="Left 4 Dead 2">Left 4 Dead 2</option>
+                <option value="Battlefield: Bad Company 2">Battlefield: Bad Company 2</option>
+                <option value="Battlefield 4">Battlefield 4</option>
+                <option value="Battlefield 1">Battlefield 1</option>
+                <option value="Red Alert">Red Alert</option>
+                <option value="Red Alert 2">Red Alert 2</option>
+                <option value="Red Alert 3">Red Alert 3</option>
+                <option value="Command and Conquer">Command and Conquer</option>
+                <option value="Tiberian Sun">Tiberian Sun</option>
+                <option value="Tiberian Wars">Tiberian Wars</option>
+                <option value="Generals">Generals</option>
+                <option value="Rainbow Six: Siege">Rainbow Six: Siege</option>
+                <option value="Portal 2">Portal 2</option>
+              </select><br>
+              <label>Date: </label><input type="date" name="gameDate"><br>
+          		<label>Details: </label><input type="text" name="gameDetails" size="40"><br>
           		<input type="submit" name="requestSubmit" value="Submit">
         	</form>
 		</article>

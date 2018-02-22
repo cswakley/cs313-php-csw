@@ -1,7 +1,10 @@
 <?php
 
+	include 'password.php';
+
 	session_start();
 
+	// Connect to database
 	$dbUrl = getenv('DATABASE_URL');
 
 	if (empty($dbUrl))
@@ -25,6 +28,7 @@
 		die();
 	}
 
+	// When the user tries to log in on the navbar, this fires.
 	if (isset($_POST['loginSubmit']))
 	{
 		if($_POST['usrname'] != "")
@@ -33,8 +37,11 @@
 
 			foreach($db->query('SELECT username, password FROM users') as $log)
 			{
-				if($log['username'] == $_POST['usrname'] && $log['password'] == $_POST['pass'])
+				$hashed = $log['password'];
+				$userpass = $_POST['pass'];
+				if($log['username'] == $_POST['usrname'] && password_verify($userpass, $hashed))
 				{
+					// If username and passwords match, the username is stored as a session variable
 					$_SESSION['usr'] = $log['username'];
 					$usermatch = true;
 				}
@@ -48,6 +55,7 @@
 		}
 	}
 
+	// If the user logs out, the session is cleared.
 	if (isset($_POST['logout']))
 	{
 		session_unset();
@@ -60,7 +68,7 @@
 </head>
 <center>
 <header>
-	<h1 class="header">PHANTOM FOXTROT</h1>
+	<div class="header" align="right"><img src="FinalBanner.PNG"></div>
 </header>
 
 <div class="topnav">
@@ -69,6 +77,8 @@
 	<a href="chat.php">Chat</a>
 	<a href="join.php">Join us!</a>
 	<?php
+		/* This jumbled mess handles what is displayed on the righthand side of the navbar, depending if
+		the user is logged in or not. */
 		if (!isset($_SESSION['usr']))
 		{
 	?>

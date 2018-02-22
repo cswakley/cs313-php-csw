@@ -8,6 +8,18 @@
 
 <body>
 	<div id="wrapper">
+		<div id="menu">
+			<?php
+				if (!isset($_SESSION['usr']))
+				{
+					echo "Please sign in to use chat.";
+				}
+				else
+				{
+					echo "Posting as: <b>" . $_SESSION['usr'] . "</b>";
+				}
+			?>
+		</div>
 		<div id="chatOutput"></div>
 		<center>
 			<input name="usernm" type="hidden" id="chatUser" value="<?php echo $_SESSION['usr']; ?>">
@@ -19,8 +31,7 @@
 	<script>
 		
 		$(document).ready(function () {
-    		var chatInterval = 200; //refresh interval in ms
-    		// var $userName = "<?php echo $_SESSION['usr']; ?>";
+    		var chatInterval = 1500; //refresh interval in ms
     		var $userName = $("#chatUser");
     		var $chatOutput = $("#chatOutput");
     		var $chatInput = $("#chatInput");
@@ -59,28 +70,6 @@
         		retrieveMessages();
     		}, chatInterval);
 		});
-		
-
-		// function update()
-		// {
-		// 	$.post("server.php", {}, function(data){ $("#chatOutput").val(data);});
-		// }
-
-		// $(document).ready(
-
-		// 	function()
-		// 	{
-		// 		update();
-
-		// 		$("#chatSend").click(
-		// 			function()
-		// 			{
-		// 				$.post("server.php", { message: $("#chatInput").val()}, function(data){
-		// 					$("#chatOutput").val(data);
-		// 					$("#chatInput").val("");
-		// 				});
-		// 			});
-		// 		});
 	</script>
 </body>
 </html>

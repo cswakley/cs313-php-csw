@@ -2,7 +2,7 @@
 
 	require("connect.php");
 
-	foreach($db->query('SELECT message, sender_id FROM messages') as $row)
+	foreach($db->query('SELECT message, sender_id, datetime FROM messages') as $row)
 	{
 		$temp = $row['sender_id'];
 		$usr = $db->prepare("SELECT username FROM users WHERE id = '$temp'");
@@ -12,8 +12,16 @@
 
 		$username = $usernm['username'];
 		$text = $row['message'];
+		$datetime = $row['datetime'];
 
-		echo "<p id=\"chat\">$username: $text</p>\n";
+		if ($datetime != "")
+		{
+			echo "<p id=\"chat\">$username ($datetime): $text</p>\n";
+		}
+		else
+		{
+			echo "<p id=\"chat\">$username: $text</p>\n";
+		}
 	}
 
 ?>
